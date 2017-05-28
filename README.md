@@ -247,8 +247,7 @@ select sName, GPA
 from Student C1
 
 where not exists( select * from student C2
-
-                  where C2.GPA > C1.GPA
+                  where C2.GPA > C1.GPA)
                   
 
 select sName, GPA
@@ -263,8 +262,7 @@ select cName
 from college S1
 
 where not enrolloment < any (select enrollment from college S2
-
-                              where S2.cName <> S1.cName)
+                             where S2.cName <> S1.cName)
                               
                               
 not .. = .. is not equal to <>
