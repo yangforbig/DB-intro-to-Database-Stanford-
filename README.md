@@ -125,7 +125,8 @@ Adheres to basic structural requirements
                      Not well-formed 
 
 
-DTD: 
+**DTD**: 
+
 - Grammar-like language for specifying elements, attributes, nesting, ordering  
 - Also special attribute types ID and IDREF(s)
 
@@ -153,19 +154,19 @@ XML QUIZ:
 
 Well-formed XML must follow these rules (along with others):
 
-There must be exactly one top level element.
+(1) There must be exactly one top level element.
 
-All opening tags must be closed.
+(2) All opening tags must be closed.
 
-All elements are properly nested i.e., there are no interleaved elements.
+(3) All elements are properly nested i.e., there are no interleaved elements.
 
-Attribute values must be enclosed in single or double quotes.
+(4) Attribute values must be enclosed in single or double quotes.
 
 The correct choices (i.e., the erroneous DTD snippets) are based on two rules:
 
-A #REQUIRED attribute must appear in every element.
+(1) A #REQUIRED attribute must appear in every element.
 
-An attribute can have types CDATA, ID, or IDREF(S), but not #PCDATA.
+(2) An attribute can have types CDATA, ID, or IDREF(S), but not #PCDATA.
 
 JASON
 
