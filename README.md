@@ -195,7 +195,7 @@ Basic constructs
 | Ordering           | None| Array |
 |Implementation       |Native|coupled with PLS, NOSQL systems |
 
-JASN Schema: mechanism for enforcing certain constraints beyond simple syntatic correctness
+**JASN Schema: mechanism for enforcing certain constraints beyond simple syntatic correctness**
 
 JASO allows to have additional attributes that are described in JASN.
 
@@ -219,38 +219,59 @@ indexes, constraints, views, triggers, transactions, authorization,
 as: change the attribute name 
 
 select s1.sID, s1.sName, s1.GPA, s2.sID, s2.sName, s2.GPA
+
 from student s1, student s2
+
 where s1.GPA = s2.GPA and s1.sID <> s2.sID
 
+
 Union, intercet, except
+
 Union in sql by default eliminates duplicates in its results
 
 subquery can eliminate duplicates
 
+**Students who have applied CS major did not apply the EE major**
 select sID, sName
+
 from Student
+
 where sID in (select sID from Apply where major = 'CS')
+
 and sID not in (select sID from Apply where major != 'EE')
 
-find the largest or smallest 
+**find the largest or smallest(Without using MAX, MIN)**
+
 select sName, GPA
-from Student C!
+
+from Student C1
+
 where not exists( select * from student C2
-                  where C2.GPA > C!.GPA
+
+                  where C2.GPA > C1.GPA
                   
+
 select sName, GPA
+
 from Student 
+
 where GPA >= all (select GPA from student);
 
+
 select cName
+
 from college S1
+
 where not enrolloment < any (select enrollment from college S2
-                              where S2.cName <> S1.cName
+
+                              where S2.cName <> S1.cName)
+                              
                               
 not .. = .. is not equal to <>
 
 any, one or more 
-It turns out we can always write a query that would use any or all by using the exists operator or not exists instead
+
+**It turns out we can always write a query that would use any or all by using the exists operator or not exists instead**
 
 
 
