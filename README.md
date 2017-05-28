@@ -53,13 +53,19 @@ Key people
   (1) The relation model
   
   a set of named relations( or tables)
+  
   Each relation has a set of named attributes ( or columns)
+  
   Each tuple (or row) has value for each attribute
+  
   Each attribute has a type (or domain)
   
   Schema: stuctural description of relation
+  
   instance: actual content at given point in time
+  
   NULL: undefined or unknown
+  
   key: attribute whose value is unique in each tuple or set of attributes whose combined values are unique 
   
   Create relation:
@@ -67,6 +73,7 @@ Key people
   CREATE TABLE STUDENT (ID, NAME, GPA, PICTURE)
   
   (2) Querying Relational Database
+  
   - relational Algrebra
   
   - SQL
@@ -74,15 +81,21 @@ Key people
   3. XML data
   
   XML: extensible markup language
+  
 - standard for data representation and exchange
+
 - Document format similar to HTML
+
   Tags describe content instead of formatting 
+  
 - Steaming format
 
 1. Well-Formed XML
 
 - Tagged elements
+
 - Attributes
+
 - Text
 
 |                  | Relational                        | XML              |
@@ -127,9 +140,13 @@ XML scheme:
 - Like DTDs, can specify elements, attributes, nesting, ordering, occurences
 - Also data types, keys, typed(pointer)
 - XSD is written in XML
+
 in DTD all attributes are treated as strings
+
 in XSD the type of attributes can be specified 
+
 in XSD reference key can be set
+
 in XSD the occurences can be specified (minOccurs, maxOccurs) default is 1
 
 XML QUIZ: 
@@ -137,19 +154,25 @@ XML QUIZ:
 Well-formed XML must follow these rules (along with others):
 
 There must be exactly one top level element.
+
 All opening tags must be closed.
+
 All elements are properly nested i.e., there are no interleaved elements.
+
 Attribute values must be enclosed in single or double quotes.
 
 The correct choices (i.e., the erroneous DTD snippets) are based on two rules:
 
 A #REQUIRED attribute must appear in every element.
+
 An attribute can have types CDATA, ID, or IDREF(S), but not #PCDATA.
 
 JASON
 
 An alternative model for the semi-structured data
-JASON --> JavaScript Object Notation
+
+JSON --> JavaScript Object Notation
+
 - standard for "serializing" data objects, usually in files
 - Human-readable, useful for data interchange
 
