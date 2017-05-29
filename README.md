@@ -216,6 +216,9 @@ update
 - Other Commands
 indexes, constraints, views, triggers, transactions, authorization, 
 
+
+**Subqueies in where clause**
+
 as: change the attribute name 
 
 select s1.sID, s1.sName, s1.GPA, s2.sID, s2.sName, s2.GPA
@@ -271,14 +274,18 @@ any, one or more
 
 **It turns out we can always write a query that would use any or all by using the exists operator or not exists instead**
 
+**Subqueies in From and Select**
 
 
+select sID, sName, GPA, GPA * (sizeHS/1000.0) as scaleGPA
 
-Basic 
+from student
 
-
-
-
+where abs(GPA * (sizeHS/1000.0) - GPA > 1.0;
+          |
+          |
+          V
+select *
 
 
 
