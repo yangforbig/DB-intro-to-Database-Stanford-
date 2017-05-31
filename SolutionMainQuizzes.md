@@ -33,6 +33,6 @@ where mID in(select R.mID as mID
 
 ```
 delete from rating
-where mID in (select mID from movie where year <1970 or year > 2000)
-and stars < 4;
+where mID in (select mID from movie
+              where year <1970 or year > 2000) and stars < 4;
 ```
