@@ -379,7 +379,7 @@ Or use Using clause(software engineering standpoint)
 comutativity     (A op B) = (B op A)
 associativity   (A op B) op C = A op (B op C)
 
-
+# hello
 ## Relatinoal Design Overview
 
 
