@@ -216,6 +216,17 @@ update
 - Other Commands
 indexes, constraints, views, triggers, transactions, authorization, 
 
+Demo: simple college admission database
+
+college(cName, state, enrollment)
+
+student(sID, sName, GPA, sizeHS)
+
+Apply(sID, cName, major, decision)
+
+
+
+
 
 **Subqueies in where clause**
 
@@ -282,10 +293,89 @@ select sID, sName, GPA, GPA * (sizeHS/1000.0) as scaleGPA
 from student
 
 where abs(GPA * (sizeHS/1000.0) - GPA > 1.0;
-          |
-          |
-          V
-select *
+     
+=> select *
+from ( sID, sName, GPA, GPA * (sizeHS / 1000.0) as scaleGPA
+from student) G
+where abs(scaleGPA - GPA) > 1.0;
+
+
+**Aggregation Function **
+
+min,max,sum,avg,count
+
+select count(distinct sID)
+from Apply
+where cName = 'Cornel';
+
+having clause only used in the conjuectino with aggregation 
+
+**NULL**
+
+count(distinct ..) will omit the null rows
+
+**Data Modification Statements**
+
+- insert new data(2 methods)
+
+1. insert into table 
+   values(A1, A2, A3,..,An)
+2. Insert into table 
+   select-statement 
+
+# insert the students who did not apply any college with CMU in CS major
+
+insert into apply
+select sID, "Carnegie Mellon", "CS", NULL
+from student
+where sIN not in (select sID from apply)
+   
+- Delete exisiting data
+
+Delete from table 
+where condition 
+
+# delete colleges with no cs applicants
+
+Delete from college
+where cName not in (select cName from Apply where major = 'CS')
+
+- updating existing data
+
+update table 
+set att = expression
+where condition
+
+update Apply 
+set decision = 'Y', major = 'economics'
+where cName = 'Carneige'
+
+update Student 
+set GPA = (select max(GPA) from student)
+    sizeHZ = (select min(GPA) from student);
+
+
+
+update ...
+set ...
+
+**Join Operator**
+inner join on condition 
+natrual join 
+inner join using attribute 
+outer join(right, left, full)
+
+
+**Join three tables**
+select Apply.sID, sName, GPA, Apply.cName enrollment
+from (Apply join Student on Apply.sID = Student.sID) join College
+on Apply.cName = College.cName
+
+Natural Join automatically equating colomns and then eliminate duplicates. 
+Or use Using clause(software engineering standpoint)
+
+comutativity     (A op B) = (B op A)
+associativity   (A op B) op C = A op (B op C)
 
 
 
