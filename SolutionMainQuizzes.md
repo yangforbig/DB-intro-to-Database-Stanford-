@@ -5,6 +5,7 @@
 - SQL Social-Network Query Exercises Core Set[Post-Deadline Practice]
 
 - SQL Movie-Rating Modification Exercises [Post-Deadline Practice]
+-----------
 
 Q3: For all movies that have an average rating of 4 stars or higher, add 25 to the release year. (Update the existing tuples; don't insert new tuples.) 
 
