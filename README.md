@@ -90,7 +90,7 @@ Key people
   
 - Steaming format
 
-(1) Well-Formed XML
+ Well-Formed XML
 
 - Tagged elements
 
@@ -380,7 +380,7 @@ comutativity     (A op B) = (B op A)
 associativity   (A op B) op C = A op (B op C)
 
 
-
+## Relatinoal Design Overview
 
 
 
