@@ -1,4 +1,4 @@
-#SQL
+# SQL
 
 - SQL Movie-Rating Query Exercises Core Set[Post-Deadline Practice]
 
