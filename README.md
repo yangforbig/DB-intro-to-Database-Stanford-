@@ -1,16 +1,16 @@
 # DB intro to Database Stanford
-Study note for the course Introduction to Database from Stanford
+*Study note for the course [Introduction to Database from Stanford](https://lagunita.stanford.edu/courses/Engineering/db/2014_1/about)*
+*Last updated Jun 7 2016*
 
+##Introduction 
 
-1. Introduction 
-
-Charateristics of Database
+**Charateristics of Database**
 
 (1) Massive,  terabytes
 
 (2) Persistent,
 
-(3) Safe, 
+(3) Safe
 
 (4) Multi-user, concrurrency control
 
@@ -20,21 +20,18 @@ Charateristics of Database
 
 (7) Reliable 
 
-Key concepts 
+**Key concepts**
 
  - data model
  set of records(relational database), XML, graph, JASN
  
  - schema(types) versus data
  schema: structure of data
- 
- - Data definition language (DTD
- 
- 
+ - Data definition language (DTD)
  - Data manipulation or query language(DML)
  querying and modifying 
-
-Key people 
+ 
+**Key people** 
 
 - DBMS implementer
  Builds system
@@ -42,15 +39,16 @@ Key people
 - Database designer
  establish the schema
  
- - Database application developer
-  progroms that operate on database
+- Database application developer
+  programs that operate on database
   
- - database administrator 
+- database administrator 
   Loads data, keep running smoothly
   
+
+**Relational database**
   
-  2. Relational database
-  (1) The relation model
+  - The relation model
   
   a set of named relations( or tables)
   
@@ -67,18 +65,19 @@ Key people
   NULL: undefined or unknown
   
   key: attribute whose value is unique in each tuple or set of attributes whose combined values are unique 
-  
-  Create relation:
-  
+  - Create relation:
+  ```
   CREATE TABLE STUDENT (ID, NAME, GPA, PICTURE)
+  ```
   
-  (2) Querying Relational Database
+  - Querying Relational Database
   
-  - relational Algrebra
+  (1) relational Algrebra
   
-  - SQL
+  (2) SQL
   
-  3. XML data
+
+**XML data**
   
   XML: extensible markup language
   
@@ -98,6 +97,10 @@ Key people
 
 - Text
 
+
+**Difference between Relational data structure with XML data**
+
+
 |                  | Relational                        | XML              |
  ----------------- | ---------------------------- | ------------------
 | Structure | Tables          | Hierarchical|
@@ -105,42 +108,43 @@ Key people
 | Queries           |Simple, nice, long|Less so |
 | Ordering           | No| implied |
 |Implementation       |Native|add-on |
+---------------|---------------
 
-2. DTDs, IDs, and IDREFs
+1. DTDs, IDs, and IDREFs
 
 "Valid" XML
 Adheres to basic structural requirements
  Also adheres to contents-specific specification
  Document Type Descripor(DTD)
  XMLSchema(XSD)
- 
- XML document --->  XML Parser----> Parsed XML
-                        |
-                     Not well-formed 
-                    
-                      DTD or XSD
- 
- XML document --->  Validing XML Parser----> Parsed XML
-                        |
-                     Not well-formed 
 
+                     
+```
+
+ 
+ XML document --> Validing XML Parser--> Parsed XML
+                        |
+                        V
+                  Not well-formed 
+```
 
 **DTD**: 
 
 - Grammar-like language for specifying elements, attributes, nesting, ordering  
 - Also special attribute types ID and IDREF(s)
 
-Positive: programs can assume struture
-CSS/XSL ,
+Positive: programs can assume struture. CSS/XSL 
 Negative: flexibility, ease of change
 
-ID is globally uniquely identified
+
 
 XML scheme:
 - extensive language
 - Like DTDs, can specify elements, attributes, nesting, ordering, occurences
 - Also data types, keys, typed(pointer)
 - XSD is written in XML
+
+**Notice**:
 
 in DTD all attributes are treated as strings
 
@@ -150,25 +154,26 @@ in XSD reference key can be set
 
 in XSD the occurences can be specified (minOccurs, maxOccurs) default is 1
 
-XML QUIZ: 
+ID is globally uniquely identified
+
 
 Well-formed XML must follow these rules (along with others):
 
-(1) There must be exactly one top level element.
+>(1) There must be exactly one top level element.
 
-(2) All opening tags must be closed.
+>(2) All opening tags must be closed.
 
-(3) All elements are properly nested i.e., there are no interleaved elements.
+>(3) All elements are properly nested i.e., there are no interleaved elements.
 
-(4) Attribute values must be enclosed in single or double quotes.
+>(4) Attribute values must be enclosed in single or double quotes.
 
 The correct choices (i.e., the erroneous DTD snippets) are based on two rules:
 
-(1) A #REQUIRED attribute must appear in every element.
+>(1) A #REQUIRED attribute must appear in every element.
 
-(2) An attribute can have types CDATA, ID, or IDREF(S), but not #PCDATA.
+>(2) An attribute can have types CDATA, ID, or IDREF(S), but not #PCDATA.
 
-JASON
+**JASON**
 
 An alternative model for the semi-structured data
 
@@ -201,21 +206,21 @@ JASO allows to have additional attributes that are described in JASN.
 
 
 
-SQL
+##SQL
 
--DDL
+- DDL
 create table
 drop table
 
--DML
+- DML
 select
 insert
 delete
 update
-
 - Other Commands
 indexes, constraints, views, triggers, transactions, authorization, 
 
+```
 Demo: simple college admission database
 
 college(cName, state, enrollment)
@@ -223,14 +228,12 @@ college(cName, state, enrollment)
 student(sID, sName, GPA, sizeHS)
 
 Apply(sID, cName, major, decision)
-
-
-
-
+```
 
 **Subqueies in where clause**
 
-as: change the attribute name 
+*as: change the attribute name* 
+```
 
 select s1.sID, s1.sName, s1.GPA, s2.sID, s2.sName, s2.GPA
 
@@ -238,14 +241,16 @@ from student s1, student s2
 
 where s1.GPA = s2.GPA and s1.sID <> s2.sID
 
+```
 
-Union, intercet, except
+**Union, intercet, except**
 
 Union in sql by default eliminates duplicates in its results
 
 subquery can eliminate duplicates
+```
+#Students who have applied CS major did not apply the EE major
 
-**Students who have applied CS major did not apply the EE major**
 select sID, sName
 
 from Student
@@ -254,7 +259,7 @@ where sID in (select sID from Apply where major = 'CS')
 
 and sID not in (select sID from Apply where major != 'EE')
 
-**find the largest or smallest(Without using MAX, MIN)**
+#find the largest or smallest(Without using MAX, MIN)
 
 select sName, GPA
 
@@ -262,7 +267,7 @@ from Student C1
 
 where not exists( select * from student C2
                   where C2.GPA > C1.GPA)
-                  
+
 
 select sName, GPA
 
@@ -281,34 +286,38 @@ where not enrolloment < any (select enrollment from college S2
                               
 not .. = .. is not equal to <>
 
-any, one or more 
+```
+**any, one or more**
 
-**It turns out we can always write a query that would use any or all by using the exists operator or not exists instead**
+	   It turns out we can always write a query that would use any or all by using the exists operator or not exists instead
 
 **Subqueies in From and Select**
 
-
+```
 select sID, sName, GPA, GPA * (sizeHS/1000.0) as scaleGPA
 
 from student
 
 where abs(GPA * (sizeHS/1000.0) - GPA > 1.0;
-     
-=> select *
+
+select *
 from ( sID, sName, GPA, GPA * (sizeHS / 1000.0) as scaleGPA
 from student) G
 where abs(scaleGPA - GPA) > 1.0;
 
+```
 
 **Aggregation Function **
 
 min,max,sum,avg,count
 
+```
 select count(distinct sID)
 from Apply
 where cName = 'Cornel';
 
 having clause only used in the conjuectino with aggregation 
+```
 
 **NULL**
 
@@ -317,36 +326,42 @@ count(distinct ..) will omit the null rows
 **Data Modification Statements**
 
 - insert new data(2 methods)
-
+```
 1. insert into table 
    values(A1, A2, A3,..,An)
+   
 2. Insert into table 
    select-statement 
-
-# insert the students who did not apply any college with CMU in CS major
+   
+```
+```
+#insert the students who did not apply any college with CMU in CS major
 
 insert into apply
 select sID, "Carnegie Mellon", "CS", NULL
 from student
 where sIN not in (select sID from apply)
-   
-- Delete exisiting data
+```
 
+- Delete exisiting data
+```
 Delete from table 
 where condition 
-
+```
+```
 # delete colleges with no cs applicants
 
 Delete from college
 where cName not in (select cName from Apply where major = 'CS')
 
-
+```
 - updating existing data
-
+```
 update table 
 set att = expression
 where condition
-
+```
+```
 update Apply 
 set decision = 'Y', major = 'economics'
 where cName = 'Carneige'
@@ -355,10 +370,7 @@ update Student
 set GPA = (select max(GPA) from student)
     sizeHZ = (select min(GPA) from student);
 
-
-
-update ...
-set ...
+```
 
 **Join Operator**
 inner join on condition 
@@ -366,8 +378,8 @@ natrual join
 inner join using attribute 
 outer join(right, left, full)
 
-
-**Join three tables**
+```
+#Join three tables
 
 select Apply.sID, sName, GPA, Apply.cName enrollment
 from (Apply join Student on Apply.sID = Student.sID) join College
@@ -378,13 +390,9 @@ Or use Using clause(software engineering standpoint)
 
 comutativity     (A op B) = (B op A)
 associativity   (A op B) op C = A op (B op C)
+```
 
-# hello
-## Relatinoal Design Overview
-
-## Recursion 
-
-SQL With Statement 
+##SQL With Statement 
 
 With Recursive 
 	R1 as (query-1)
