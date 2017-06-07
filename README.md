@@ -379,6 +379,160 @@ associativity   (A op B) op C = A op (B op C)
 
 
 
+## Recursion 
+
+SQL With Statement 
+
+With Recursive 
+	R1 as (query-1)
+	R2 as (query-2)
+	...
+<query involving R (and other tables)>
+
+
+With Recursive 
+
+	R As ( base query
+			Union
+		   recursive query)
+<query involving R (and other tables)>
+
+
+example 1: find the ancestors of Mary
+
+| parent | child |
+---------|--------
+|Alice|Carol|
+|Bob|Carol|
+|Carol|Dave|
+|Carol|George|
+|Dave|Mary|
+|Eve|Mary|
+|Mary|Frank|
+
+```
+with recursive 
+	Ancestor(a, d) as (select parent as a, child as d from ParentOf
+					   Union
+					   select Ancestor.a, ParentOf.child as d
+					   from Ancestor, ParentOf
+					   where Ancestor.d = ParentOf.parent)
+select a from Ancestor where d = "Mary";
+
+```
+
+example 2: total salary cost of project
+
+--employee--
+
+| id | salary |
+---------|--------
+|123|100|
+|234|90|
+|345|80|
+|456|70|
+|567|60|
+
+--manager--
+
+| mid | eid |
+---------|--------
+|123|234|
+|234|345|
+|234|456|
+|345|567|
+
+--project--
+
+| mid | mgrID |
+------|------
+|X|123|
+|Y|234|
+|Z|456|
+
+
+Query:
+```
+with recursive
+	Xemps(ID) as (select mgrID as ID from project where name = 'X'
+				  union
+				  select eid as ID
+				  from manager, Xemps
+				  where mid = ID)
+select sum(salary)
+from employee
+where id in (select id from Xemps);
+```
+
+example 3: find the cheapest way to get B from A
+
+--Flight--
+
+|origin|dest|airline|cost|
+-------|----|-------|-----
+|A|ORD|United|200|
+|ORD|B|American|100|
+|A|PHX|Southwest|25|
+|PHX|LAS|Southwest|30|
+|LAS|CMH|Frontier|60|
+|CMH|B|Frontier|60|
+|A|B|JetBlue|195|
+
+Query:
+
+```
+with recursive
+	FromA(dest, total) as
+		(select dest, cost as total from flight where orig = 'A'
+		 union
+		 select flight.dest, total + cost
+		 from flight, FromA
+		 where flight.orig = FromA.dest)
+select * from FromA where dest = 'B';
+```
+
+```
+with recursive
+	ToB(orig, total) as
+		(select orig, cost from Flight where dest = 'B'
+		union
+		select flight.orig, cost+total
+		from Flight, ToB
+		where Flight.dest = ToB.orig
+select * from ToB;
+```
+
+What if the there is an infinite loop in the relation, use LIMIT clause or define a flag
+
+**Nonlinear Recursive**
+
+Nonlinear Recursive converge faster(running time log(n)) but hard to implement.
+Nonlinear Recursive is not supported in current SQL and Posgres
+
+
+		
+
+
+
+
+
+
+
+
+
+				  
+				
+
+
+
+
+
+
+
+
+
+
+
 
 
 
