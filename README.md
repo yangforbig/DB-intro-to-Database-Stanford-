@@ -90,7 +90,7 @@ Key people
   
 - Steaming format
 
-1. Well-Formed XML
+ Well-Formed XML
 
 - Tagged elements
 
@@ -340,6 +340,7 @@ where condition
 Delete from college
 where cName not in (select cName from Apply where major = 'CS')
 
+
 - updating existing data
 
 update table 
@@ -367,6 +368,7 @@ outer join(right, left, full)
 
 
 **Join three tables**
+
 select Apply.sID, sName, GPA, Apply.cName enrollment
 from (Apply join Student on Apply.sID = Student.sID) join College
 on Apply.cName = College.cName
@@ -377,7 +379,8 @@ Or use Using clause(software engineering standpoint)
 comutativity     (A op B) = (B op A)
 associativity   (A op B) op C = A op (B op C)
 
-
+# hello
+## Relatinoal Design Overview
 
 ## Recursion 
 
